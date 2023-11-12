@@ -27,6 +27,13 @@ car_gps_v2/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_flash_ex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_pwr.h \
+  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc.h \
+  ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc_ex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h \
-  ..\Core\Inc\adc.h ..\Core\Inc\main.h ..\Core\Inc\usart.h \
-  ..\Core\Inc\gpio.h
+  ..\Core\Inc\adc.h ..\Core\Inc\main.h ..\Core\Inc\rtc.h \
+  ..\Core\Inc\usart.h ..\Core\Inc\gpio.h ..\Core\Inc\GSM_stm32.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdarg.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h ..\Core\Inc\gps.h \
+  ..\Core\Inc\sleep_functions.h ..\Core\Inc\larzesh.h

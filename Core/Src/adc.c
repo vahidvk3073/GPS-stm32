@@ -22,6 +22,8 @@
 
 /* USER CODE BEGIN 0 */
 
+#define Vref 3.3
+#define ADC_SAMPLE_NUMBER 100
 /* USER CODE END 0 */
 
 ADC_HandleTypeDef hadc1;
