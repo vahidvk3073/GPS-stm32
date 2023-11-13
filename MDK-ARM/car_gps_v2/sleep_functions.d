@@ -1,4 +1,5 @@
-car_gps_v2/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
+car_gps_v2/sleep_functions.o: ..\Core\Src\sleep_functions.c \
+  ..\Core\Inc\sleep_functions.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h \
   ..\Core\Inc\stm32f1xx_hal_conf.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc.h \
@@ -30,10 +31,8 @@ car_gps_v2/main.o: ..\Core\Src\main.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc_ex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h \
-  ..\Core\Inc\adc.h ..\Core\Inc\main.h ..\Core\Inc\rtc.h \
-  ..\Core\Inc\usart.h ..\Core\Inc\gpio.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h ..\Core\Inc\GSM_stm32.h \
+  ..\Core\Inc\GSM_stm32.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdarg.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h ..\Core\Inc\gps.h \
-  ..\Core\Inc\sleep_functions.h ..\Core\Inc\GSM_stm32.h
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h

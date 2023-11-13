@@ -9,6 +9,7 @@
 "car_gps_v2\usart.o"
 "car_gps_v2\stm32f1xx_it.o"
 "car_gps_v2\stm32f1xx_hal_msp.o"
+"car_gps_v2\sleep_functions.o"
 "car_gps_v2\stm32f1xx_hal_gpio_ex.o"
 "car_gps_v2\stm32f1xx_hal_adc.o"
 "car_gps_v2\stm32f1xx_hal_adc_ex.o"

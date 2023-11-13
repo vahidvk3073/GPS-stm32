@@ -9,7 +9,7 @@ char uart1_rx_buffer[RX_BUFFER_SIZE] = {'\0'};
 
 char receive_message[RX_BUFFER_SIZE] = {'\0'};
 char receive_message_number[RECEIVE_NUMBER_SIZE] = {'\0'};
-char receive_message_date[30] = {'\0'};
+char receive_message_date[RECEIVE_NUMBER_SIZE] = {'\0'};
 
 uint8_t uart1_rx_index = 0, cmp_index = 0  ;
 
@@ -275,6 +275,19 @@ uint8_t GSM_wakeup (void)
 				rx_clear();
 			  return FALSE;
 		}
+}
+
+/*--------------------------set 0 to all buffers  --------------------------*/
+
+void	clear_all_buffers (void)
+{
+		rx_clear();
+	
+		memset(receive_message, 0, RX_BUFFER_SIZE);
+	
+		memset(receive_message_number, 0, RECEIVE_NUMBER_SIZE);
+	
+		memset(receive_message_date, 0, RECEIVE_NUMBER_SIZE); 
 }
 
 /*-------------------------- blink  --------------------------*/

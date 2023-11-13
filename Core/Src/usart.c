@@ -214,7 +214,19 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+#if DEBUG_MODE 
 
+//printf code
+PUTCHAR_PROTOTYPE
+{
+  /* Place your implementation of fputc here */
+  /* e.g. write a character to the EVAL_COM1 and Loop until the end of transmission */
+  HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, 0xFFFF);
+
+  return ch;
+}
+
+#endif
 /* USER CODE END 1 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

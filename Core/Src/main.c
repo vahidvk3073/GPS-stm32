@@ -27,12 +27,13 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "stdlib.h"
+#include "stdio.h"
 #include "GSM_stm32.h"
 #include "gps.h"
 #include "sleep_functions.h"
-#include "larzesh.h"
-#include "stdlib.h"
-#include "stdio.h"
+
+
 
 /* USER CODE END Includes */
 
@@ -43,6 +44,20 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define MAIN_BLINK_INTERVAL 2000
+#define LARZESH_RTC_INTERVAL 10000
+#define GOING_SLEEP_INTERVAL 40000
+
+
+#define ALARM_HOUR 21
+#define ALARM_MINUTE 0
+#define ALARM_SECOND 0
+
+
+#define Vref 3.3
+#define ADC_SAMPLE_NUMBER 100
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -54,12 +69,40 @@
 
 /* USER CODE BEGIN PV */
 
-extern char rx_buffer[RX_BUFFER_SIZE];
+extern char uart1_rx_buffer[RX_BUFFER_SIZE];
 extern char rx_temp;
 extern char receive_message[RX_BUFFER_SIZE];
 extern char receive_message_number[30];
-
+extern char receive_message_date[30];
 char number[]="+989378936996";
+
+
+extern GPS_t GPS;
+char map_link[80];
+uint32_t send_locatoin_millis = 0;
+
+
+RTC_TimeTypeDef myTime;
+RTC_AlarmTypeDef myAlarm;
+uint8_t RTC_Alarm_Flag = 0;
+uint8_t inputBuffer[3] = {0};
+
+
+uint8_t larzesh_flag = 0 ;
+uint32_t millis_start_value = 0;
+
+
+uint16_t adc_value[1000] = {0};
+float adc_value_mean = 0;
+float Battery_voltage = 0;
+uint8_t adc_flag = 0;
+
+
+uint32_t main_millis = 0;
+uint8_t blink_state = SET;
+
+extern uint8_t sleep_mode_flag;
+extern uint32_t sleep_mode_millis;
 
 
 /* USER CODE END PV */
@@ -68,10 +111,58 @@ char number[]="+989378936996";
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
+void Set_Alarm(uint8_t h, uint8_t m, uint8_t s);
+
+float check_battery_voltage(void);
+
+void send_location(void);
+
+void send_battery_voltage(void);
+
+void send_larzesh_alarm(void);
+
+void send_RTC_alarm(void);
+
+void RTC_init(void);
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+
+
+void HAL_UART_RxCpltCallback (UART_HandleTypeDef *huart)
+{
+		if (huart == &huart2)
+		{
+				GPS_UART_CallBack();
+		}
+		else if (huart == &huart1)
+		{
+				get_answer();
+		}
+}
+
+
+void HAL_GPIO_EXTI_Callback (uint16_t GPIO_Pin)
+{
+	
+		if (GPIO_Pin == LARZESH_Pin)
+		{
+				millis_start_value = HAL_GetTick();
+				larzesh_flag = 1;
+		}
+}
+
+
+void HAL_RTC_AlarmAEventCallback (RTC_HandleTypeDef *hrtc)
+{
+		millis_start_value = HAL_GetTick();
+		RTC_Alarm_Flag = 1;
+}
+
 
 /* USER CODE END 0 */
 
@@ -109,12 +200,86 @@ int main(void)
   MX_RTC_Init();
   /* USER CODE BEGIN 2 */
 
+	GSM_wakeup();
+	
+	GSM_init();	
+	
+	RTC_init();
+	
+	sleep_mode_init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		
+			if ((HAL_GetTick() - main_millis) > MAIN_BLINK_INTERVAL)
+			{
+					HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, !blink_state);
+					main_millis = HAL_GetTick();
+		  }
+			
+			
+			
+			
+			if (strstr(uart1_rx_buffer, "+CMTI:") != NULL)
+			{
+				
+					GSM_readMessage();
+				
+					if ((strstr(receive_message, "send location") != NULL) && (strstr(receive_message_number, number) != NULL) )
+					{
+							send_location();
+					}
+
+					
+					
+			/*check battery voltage*/
+					
+					if ((strstr(receive_message , "battery voltage") != NULL) && (strstr(receive_message_number , number) != NULL) )
+					{
+							send_battery_voltage();
+					}
+			
+					
+					clear_all_buffers();
+					
+					sleep_mode_init();
+		}
+
+		
+		
+		
+		if ((HAL_GetTick() - millis_start_value) > LARZESH_RTC_INTERVAL)
+		{
+				if (larzesh_flag == 1)
+				{
+						send_larzesh_alarm();
+				}
+				
+
+				if (RTC_Alarm_Flag == 1)
+				{
+						send_RTC_alarm();
+				}
+		}
+		
+		
+		
+		if ((HAL_GetTick() - sleep_mode_millis) > GOING_SLEEP_INTERVAL)
+		{
+				if (sleep_mode_flag == 1)
+				{
+						HAL_GPIO_WritePin(NEO6m_power_GPIO_Port, NEO6m_power_Pin, GPIO_PIN_RESET);
+						GSM_goSleep();
+						HAL_Delay(1000);
+						go_to_sleepMode();
+				}	
+		}
+		
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -170,6 +335,170 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
+
+void Set_Alarm (uint8_t h, uint8_t m, uint8_t s)
+{
+		myAlarm.AlarmTime.Hours = h;
+		myAlarm.AlarmTime.Minutes = m ;
+		myAlarm.AlarmTime.Seconds = s ;
+		myAlarm.Alarm = RTC_ALARM_A;
+		HAL_RTC_SetAlarm_IT(&hrtc, &myAlarm, RTC_FORMAT_BIN);
+}
+
+
+
+
+float check_battery_voltage (void)
+{
+		for (uint16_t i = 0; i < ADC_SAMPLE_NUMBER; i++)
+		{
+				HAL_ADC_Start(&hadc1);
+				HAL_ADC_PollForConversion(&hadc1, 1);
+				adc_value[i] = HAL_ADC_GetValue(&hadc1);
+				HAL_ADC_Stop(&hadc1);
+				HAL_Delay(100);
+				adc_value_mean = adc_value_mean + adc_value[i];
+		}
+		
+		adc_value_mean = (adc_value_mean / (float)ADC_SAMPLE_NUMBER);
+		
+		return ((adc_value_mean * Vref) / 4095.0);
+}
+
+
+
+void send_location (void)
+{
+		send_locatoin_millis = HAL_GetTick();
+		
+		HAL_UART_MspInit(&huart2);
+		
+		HAL_GPIO_WritePin(NEO6m_power_GPIO_Port, NEO6m_power_Pin, GPIO_PIN_SET);
+		
+		GPS_Init();
+		
+		
+	#if DEBUG_MODE
+			GSM_sendMessage("map location \r\n" , number);
+	#else
+		
+		
+		do
+		{
+				if (GPS.dec_latitude != 0 && GPS.dec_longitude != 0)
+				{
+						float Battery_voltage = 2 * check_battery_voltage();
+					
+						if (Battery_voltage > 3 )
+						{
+								sprintf(map_link, "http://maps.google.com/maps?q=loc:%f,%f \r\n", GPS.dec_latitude, GPS.dec_longitude);
+						}
+				}
+				
+				
+				if ((HAL_GetTick() - send_locatoin_millis) > GOING_SLEEP_INTERVAL)
+				{
+					GSM_sendMessage("error in supply NEO-6m power \r\n", number);
+					
+					HAL_NVIC_SystemReset();
+				}
+				
+		}while (GPS.dec_latitude == 0 && GPS.dec_longitude == 0);
+		
+		
+		
+		GSM_sendMessage(map_link, number);
+		
+		HAL_UART_MspDeInit(&huart2);
+		
+		#endif				
+		
+		HAL_GPIO_WritePin(NEO6m_power_GPIO_Port, NEO6m_power_Pin, GPIO_PIN_RESET);
+}
+	
+
+
+void send_battery_voltage (void)
+{
+		yellow_blink(1000);
+	
+		Battery_voltage = 2 * check_battery_voltage();
+	
+		char adc_buffer[30];
+	
+		sprintf(adc_buffer ,"battery voltage:%0.2f \r\n",Battery_voltage);
+	
+		GSM_sendMessage(adc_buffer, number);
+}
+
+
+
+
+void send_larzesh_alarm (void)
+{
+		larzesh_flag = 0;
+
+		GSM_wakeup();
+
+		GSM_sendMessage("probable danger,check your car\r\n", number);
+
+		sleep_mode_flag = 1;
+
+		sleep_mode_millis = HAL_GetTick();
+
+		rx_clear();
+}
+
+
+
+void send_RTC_alarm (void)
+{
+		GSM_wakeup();
+		
+		RTC_Alarm_Flag = 0;
+		
+		Battery_voltage = check_battery_voltage();
+		
+		char adc_buffer[30];
+		sprintf(adc_buffer, "battery voltage:%f \r\n", Battery_voltage);
+		GSM_sendMessage(adc_buffer, number);
+		
+		Set_Alarm(ALARM_HOUR, ALARM_MINUTE, ALARM_SECOND);
+		
+		sleep_mode_flag = 1;
+		
+		sleep_mode_millis = HAL_GetTick();
+}
+
+
+
+void RTC_init (void)
+{
+/*set Alarm setting */
+	/*
+		Set_Alarm(ALARM_HOUR, ALARM_MINUTE, ALARM_SECOND);
+		
+		myTime.Hours = inputBuffer[0];
+		myTime.Minutes = inputBuffer[1];
+		myTime.Seconds = inputBuffer[2];
+		
+		HAL_RTC_SetTime(&hrtc, &myTime, RTC_FORMAT_BIN);
+	*/
+	
+	
+	/*check reset flag */
+	/*
+	if(__HAL_RCC_GET_FLAG(RCC_FLAG_IWDGRST) != RESET)
+		{
+				green_blink(50);
+				__HAL_RCC_CLEAR_RESET_FLAGS();
+		}
+	*/
+}
+
+
 
 /* USER CODE END 4 */
 

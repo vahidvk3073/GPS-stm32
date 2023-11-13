@@ -28,6 +28,7 @@ void 				rx_clear(void);
 uint8_t 		GSM_messageDelete(void);
 uint8_t			GSM_goSleep(void);
 uint8_t			GSM_wakeup(void);
+void				clear_all_buffers(void);
 void 				yellow_blink(uint16_t delay);
 void 				green_blink(uint16_t delay);
 #endif
