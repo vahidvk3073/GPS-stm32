@@ -3,11 +3,11 @@
 <title>Static Call Graph - [car_gps_v2\car_gps_v2.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image car_gps_v2\car_gps_v2.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Mon Nov 13 20:23:17 2023
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Wed Nov 15 09:59:36 2023
 <BR><P>
 <H3>Maximum Stack Usage =        480 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; GSM_readMessage &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
+main &rArr; GSM_read_message &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 <P>
 <H3>
 Mutually Recursive functions
@@ -237,7 +237,7 @@ Global Symbols
 <P><STRONG><a name="[a]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f103xb.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[41]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[41]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
@@ -246,15 +246,16 @@ Global Symbols
 
 <P><STRONG><a name="[f5]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[40]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[40]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text))
 <BR><BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
+</UL>
+<BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffer
 </UL>
 
 <P><STRONG><a name="[6e]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffers
 </UL>
 
 <P><STRONG><a name="[f6]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
@@ -263,20 +264,20 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[7a]"></a>strstr</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, strstr.o(.text))
+<P><STRONG><a name="[79]"></a>strstr</STRONG> (Thumb, 36 bytes, Stack size 12 bytes, strstr.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = strstr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
+<LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 </UL>
 
 <P><STRONG><a name="[e6]"></a>strlen</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, strlen.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
 </UL>
 
-<P><STRONG><a name="[7b]"></a>strcpy</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, strcpy.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
+<P><STRONG><a name="[7a]"></a>strcpy</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, strcpy.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 </UL>
 
 <P><STRONG><a name="[71]"></a>strncmp</STRONG> (Thumb, 30 bytes, Stack size 12 bytes, strncmp.o(.text))
@@ -290,8 +291,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__vfscanf_char
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_parse
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_parse
 </UL>
 
 <P><STRONG><a name="[45]"></a>_scanf_int</STRONG> (Thumb, 332 bytes, Stack size 56 bytes, _scanf_int.o(.text))
@@ -626,9 +627,9 @@ Global Symbols
 <P><STRONG><a name="[6b]"></a>GPS_UART_CallBack</STRONG> (Thumb, 116 bytes, Stack size 8 bytes, gps.o(.text.GPS_UART_CallBack))
 <BR><BR>[Stack]<UL><LI>Max Depth = 328<LI>Call Chain = GPS_UART_CallBack &rArr; GPS_parse &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_validate
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
+<LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_validate
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_parse
-<LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_RxCpltCallback
@@ -664,55 +665,53 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
 </UL>
 
-<P><STRONG><a name="[73]"></a>GSM_goSleep</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_goSleep))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_goSleep &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<P><STRONG><a name="[73]"></a>GSM_go_sleep</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_go_sleep))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_go_sleep &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[76]"></a>GSM_init</STRONG> (Thumb, 152 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_init))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_init &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<P><STRONG><a name="[76]"></a>GSM_init</STRONG> (Thumb, 128 bytes, Stack size 16 bytes, gsm_stm32.o(.text.GSM_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = GSM_init &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Receive_IT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[77]"></a>GSM_messageDelete</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_messageDelete))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_messageDelete &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<P><STRONG><a name="[77]"></a>GSM_message_delete</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_message_delete))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_message_delete &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 </UL>
-<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 </UL>
 
-<P><STRONG><a name="[78]"></a>GSM_readMessage</STRONG> (Thumb, 164 bytes, Stack size 216 bytes, gsm_stm32.o(.text.GSM_readMessage))
-<BR><BR>[Stack]<UL><LI>Max Depth = 480<LI>Call Chain = GSM_readMessage &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
+<P><STRONG><a name="[78]"></a>GSM_read_message</STRONG> (Thumb, 156 bytes, Stack size 216 bytes, gsm_stm32.o(.text.GSM_read_message))
+<BR><BR>[Stack]<UL><LI>Max Depth = 480<LI>Call Chain = GSM_read_message &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 </UL>
 <BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_messageDelete
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_message_delete
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 <LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0sscanf
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7c]"></a>GSM_sendMessage</STRONG> (Thumb, 84 bytes, Stack size 120 bytes, gsm_stm32.o(.text.GSM_sendMessage))
-<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = GSM_sendMessage &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<P><STRONG><a name="[7b]"></a>GSM_send_message</STRONG> (Thumb, 76 bytes, Stack size 120 bytes, gsm_stm32.o(.text.GSM_send_message))
+<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = GSM_send_message &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<BR>[Calls]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
@@ -721,18 +720,17 @@ Global Symbols
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_RTC_alarm
 </UL>
 
-<P><STRONG><a name="[79]"></a>GSM_wakeup</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_wakeup))
+<P><STRONG><a name="[7c]"></a>GSM_wakeup</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, gsm_stm32.o(.text.GSM_wakeup))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = GSM_wakeup &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
 <LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_larzesh_alarm
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_RTC_alarm
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
 </UL>
 
 <P><STRONG><a name="[ca]"></a>HAL_ADC_ConfigChannel</STRONG> (Thumb, 270 bytes, Stack size 20 bytes, stm32f1xx_hal_adc.o(.text.HAL_ADC_ConfigChannel))
@@ -802,12 +800,12 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
 </UL>
-<BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
 <LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;green_blink
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
+<LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
 </UL>
 
 <P><STRONG><a name="[c2]"></a>HAL_GPIO_DeInit</STRONG> (Thumb, 284 bytes, Stack size 44 bytes, stm32f1xx_hal_gpio.o(.text.HAL_GPIO_DeInit))
@@ -841,11 +839,11 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[cc]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f1xx_hal_gpio.o(.text.HAL_GPIO_WritePin))
-<BR><BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
+<BR><BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;green_blink
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
+<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;green_blink
 </UL>
 
 <P><STRONG><a name="[66]"></a>HAL_GetTick</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text.HAL_GetTick))
@@ -855,6 +853,7 @@ Global Symbols
 <LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RTC_EnterInitMode
 <LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Enable
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_ConversionStop_Disable
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sleep_mode_init
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_larzesh_alarm
@@ -865,9 +864,8 @@ Global Symbols
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_ClockConfig
 <LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCCEx_PeriphCLKConfig
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_EXTI_Callback
-<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForConversion
-<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForConversion
 </UL>
 
 <P><STRONG><a name="[d2]"></a>HAL_IncTick</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f1xx_hal.o(.text.HAL_IncTick))
@@ -1186,18 +1184,18 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Start_Receive_IT
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_Init
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_answer
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_init
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_Init
 </UL>
 
 <P><STRONG><a name="[c4]"></a>HAL_UART_RxCpltCallback</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, main.o(.text.HAL_UART_RxCpltCallback))
 <BR><BR>[Stack]<UL><LI>Max Depth = 336<LI>Call Chain = HAL_UART_RxCpltCallback &rArr; GPS_UART_CallBack &rArr; GPS_parse &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 </UL>
-<BR>[Calls]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_answer
+<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_answer
+<LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_UART_CallBack
 </UL>
 <BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UART_Receive_IT
 </UL>
@@ -1362,24 +1360,24 @@ Global Symbols
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
 <LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2f
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_Stop
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_Start
 <LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_PollForConversion
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_GetValue
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
 </UL>
 <BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_battery_voltage
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_RTC_alarm
 </UL>
 
-<P><STRONG><a name="[d8]"></a>clear_all_buffers</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, gsm_stm32.o(.text.clear_all_buffers))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = clear_all_buffers &rArr; rx_clear
+<P><STRONG><a name="[d8]"></a>clear_all_buffer</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, main.o(.text.clear_all_buffer))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = clear_all_buffer &rArr; rx_buffer_clear
 </UL>
-<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
+<LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1395,11 +1393,11 @@ Global Symbols
 <P><STRONG><a name="[d9]"></a>go_to_sleepMode</STRONG> (Thumb, 58 bytes, Stack size 8 bytes, sleep_functions.o(.text.go_to_sleepMode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = go_to_sleepMode &rArr; green_blink &rArr; HAL_Delay
 </UL>
-<BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SuspendTick
+<BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;green_blink
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_SuspendTick
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ResumeTick
 <LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_PWR_EnterSLEEPMode
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;green_blink
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1414,7 +1412,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 360 bytes, Stack size 0 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 480<LI>Call Chain = main &rArr; GSM_readMessage &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
+<BR><BR>[Stack]<UL><LI>Max Depth = 480<LI>Call Chain = main &rArr; GSM_read_message &rArr; __0sscanf &rArr; __vfscanf_char &rArr; __vfscanf &rArr; _scanf_real
 </UL>
 <BR>[Calls]<UL><LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sleep_mode_init
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
@@ -1422,6 +1420,7 @@ Global Symbols
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_battery_voltage
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_RTC_alarm
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;go_to_sleepMode
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffer
 <LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemClock_Config
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART2_UART_Init
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_USART1_UART_Init
@@ -1430,89 +1429,88 @@ Global Symbols
 <LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_ADC1_Init
 <LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffers
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_init
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_goSleep
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_go_sleep
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[75]"></a>rx_clear</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gsm_stm32.o(.text.rx_clear))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = rx_clear
+<P><STRONG><a name="[75]"></a>rx_buffer_clear</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, gsm_stm32.o(.text.rx_buffer_clear))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = rx_buffer_clear
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_larzesh_alarm
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffers
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_messageDelete
+<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_message_delete
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_larzesh_alarm
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;clear_all_buffer
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_init
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_goSleep
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_go_sleep
 </UL>
 
 <P><STRONG><a name="[74]"></a>send_AT_command</STRONG> (Thumb, 72 bytes, Stack size 24 bytes, gsm_stm32.o(.text.send_AT_command))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_string
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Delay
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strstr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
-<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_messageDelete
+<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_message_delete
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 <LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_init
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_goSleep
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_go_sleep
 </UL>
 
 <P><STRONG><a name="[e2]"></a>send_RTC_alarm</STRONG> (Thumb, 108 bytes, Stack size 40 bytes, main.o(.text.send_RTC_alarm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = send_RTC_alarm &rArr; GSM_sendMessage &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = send_RTC_alarm &rArr; GSM_send_message &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Set_Alarm
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[e0]"></a>send_battery_voltage</STRONG> (Thumb, 72 bytes, Stack size 40 bytes, main.o(.text.send_battery_voltage))
-<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = send_battery_voltage &rArr; GSM_sendMessage &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = send_battery_voltage &rArr; GSM_send_message &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
+<BR>[Calls]<UL><LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;yellow_blink
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[e1]"></a>send_larzesh_alarm</STRONG> (Thumb, 64 bytes, Stack size 8 bytes, main.o(.text.send_larzesh_alarm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = send_larzesh_alarm &rArr; GSM_sendMessage &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = send_larzesh_alarm &rArr; GSM_send_message &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
-<BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_clear
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rx_buffer_clear
+<LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[df]"></a>send_location</STRONG> (Thumb, 304 bytes, Stack size 48 bytes, main.o(.text.send_location))
-<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = send_location &rArr; GSM_sendMessage &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
+<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = send_location &rArr; GSM_send_message &rArr; send_AT_command &rArr; send_string &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;check_battery_voltage
 <LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmple
@@ -1522,10 +1520,10 @@ Global Symbols
 <LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_MspDeInit
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SystemReset
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 <LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_Init
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1539,8 +1537,7 @@ Global Symbols
 <LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 </UL>
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_AT_command
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_wakeup
 </UL>
 
 <P><STRONG><a name="[de]"></a>sleep_mode_init</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, sleep_functions.o(.text.sleep_mode_init))
@@ -1573,9 +1570,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_location
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_battery_voltage
 <LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;send_RTC_alarm
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_send_message
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_read_message
 <LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPS_validate
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_sendMessage
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GSM_readMessage
 </UL>
 
 <P><STRONG><a name="[fe]"></a>__c89sprintf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0sprintf), UNUSED)

@@ -394,11 +394,6 @@
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
-              <FileName>GSM_stm32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\GSM_stm32.c</FilePath>
-            </File>
-            <File>
               <FileName>gps.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\gps.c</FilePath>
@@ -646,6 +641,11 @@
               <FileName>sleep_functions.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\sleep_functions.c</FilePath>
+            </File>
+            <File>
+              <FileName>GSM_stm32.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\GSM_stm32.c</FilePath>
             </File>
           </Files>
         </Group>

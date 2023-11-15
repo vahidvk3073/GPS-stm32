@@ -72,8 +72,8 @@
 extern char uart1_rx_buffer[RX_BUFFER_SIZE];
 extern char rx_temp;
 extern char receive_message[RX_BUFFER_SIZE];
-extern char receive_message_number[30];
-extern char receive_message_date[30];
+extern char receive_message_number[RECEIVE_NUMBER_SIZE];
+extern char receive_message_date[RECEIVE_NUMBER_SIZE];
 char number[]="+989378936996";
 
 
@@ -125,6 +125,7 @@ void send_RTC_alarm(void);
 
 void RTC_init(void);
 
+void clear_all_buffer(void);
 
 /* USER CODE END PFP */
 
@@ -227,7 +228,7 @@ int main(void)
 			if (strstr(uart1_rx_buffer, "+CMTI:") != NULL)
 			{
 				
-					GSM_readMessage();
+					GSM_read_message();
 				
 					if ((strstr(receive_message, "send location") != NULL) && (strstr(receive_message_number, number) != NULL) )
 					{
@@ -244,7 +245,7 @@ int main(void)
 					}
 			
 					
-					clear_all_buffers();
+					clear_all_buffer();
 					
 					sleep_mode_init();
 		}
@@ -273,7 +274,7 @@ int main(void)
 				if (sleep_mode_flag == 1)
 				{
 						HAL_GPIO_WritePin(NEO6m_power_GPIO_Port, NEO6m_power_Pin, GPIO_PIN_RESET);
-						GSM_goSleep();
+						GSM_go_sleep();
 						HAL_Delay(1000);
 						go_to_sleepMode();
 				}	
@@ -400,7 +401,7 @@ void send_location (void)
 				
 				if ((HAL_GetTick() - send_locatoin_millis) > GOING_SLEEP_INTERVAL)
 				{
-					GSM_sendMessage("error in supply NEO-6m power \r\n", number);
+					GSM_send_message("error in supply NEO-6m power \r\n", number);
 					
 					HAL_NVIC_SystemReset();
 				}
@@ -409,7 +410,7 @@ void send_location (void)
 		
 		
 		
-		GSM_sendMessage(map_link, number);
+		GSM_send_message(map_link, number);
 		
 		HAL_UART_MspDeInit(&huart2);
 		
@@ -430,7 +431,7 @@ void send_battery_voltage (void)
 	
 		sprintf(adc_buffer ,"battery voltage:%0.2f \r\n",Battery_voltage);
 	
-		GSM_sendMessage(adc_buffer, number);
+		GSM_send_message(adc_buffer, number);
 }
 
 
@@ -442,13 +443,13 @@ void send_larzesh_alarm (void)
 
 		GSM_wakeup();
 
-		GSM_sendMessage("probable danger,check your car\r\n", number);
+		GSM_send_message("probable danger,check your car\r\n", number);
 
 		sleep_mode_flag = 1;
 
 		sleep_mode_millis = HAL_GetTick();
 
-		rx_clear();
+		rx_buffer_clear();
 }
 
 
@@ -463,7 +464,7 @@ void send_RTC_alarm (void)
 		
 		char adc_buffer[30];
 		sprintf(adc_buffer, "battery voltage:%f \r\n", Battery_voltage);
-		GSM_sendMessage(adc_buffer, number);
+		GSM_send_message(adc_buffer, number);
 		
 		Set_Alarm(ALARM_HOUR, ALARM_MINUTE, ALARM_SECOND);
 		
@@ -472,7 +473,13 @@ void send_RTC_alarm (void)
 		sleep_mode_millis = HAL_GetTick();
 }
 
-
+void clear_all_buffer (void)
+{
+	rx_buffer_clear();
+	memset(receive_message , 0 , RX_BUFFER_SIZE);
+	memset(receive_message_number , 0 , RECEIVE_NUMBER_SIZE);
+	memset(receive_message_date , 0 , RECEIVE_NUMBER_SIZE);
+}
 
 void RTC_init (void)
 {

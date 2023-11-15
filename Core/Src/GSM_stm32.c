@@ -2,6 +2,7 @@
 
 
 extern UART_HandleTypeDef huart1;
+extern UART_HandleTypeDef huart2;
 
 char uart1_rx_temp ;
 
@@ -9,63 +10,79 @@ char uart1_rx_buffer[RX_BUFFER_SIZE] = {'\0'};
 
 char receive_message[RX_BUFFER_SIZE] = {'\0'};
 char receive_message_number[RECEIVE_NUMBER_SIZE] = {'\0'};
-char receive_message_date[RECEIVE_NUMBER_SIZE] = {'\0'};
+char receive_message_date[30] = {'\0'};
 
 uint8_t uart1_rx_index = 0, cmp_index = 0  ;
 
 
 /*-------------------------Init SIM800 module---------------------------*/
 
-void GSM_init (void)
+uint8_t GSM_init (void)
 {
-		uint8_t ok = 1;
-		
-		/*turn off echo*/
-		
-		if (ok == 1)
-		{
-				ok = send_AT_command("ATE0\r\n", "OK\r\n");
-		}
-		
-		/*access to network*/
+	uint8_t ok = 0x00;
+	
+	uint8_t ret = 0x00;
 
-		if (ok == 1)
-		{
-				ok = send_AT_command("AT+CSQ\r\n", "+CSQ");
-		}	
-		
-		/*send in text mode*/
-		
-		if (ok == 1)
-		{
-				ok = send_AT_command("AT+CMGF=1\r\n", "OK\r\n");
-		}
-		
-		/*save sms in sim card*/
-		
-		if (ok == 1)
-		{
-				ok = send_AT_command("AT+CNMI=2,1,0,0,0\r\n", "OK\r\n");
-		}
-		
-		/*dellete all sms saved in sim memory*/
+	
+	/*turn off echo*/
+	
+	ok = send_AT_command("ATE0\r\n", "OK\r\n");
+	
+	ret |= (ok << 0);
+	
 
-		if (ok == 1)
-		{
-				ok = send_AT_command("AT+CMGDA=\"DEL ALL\"\r\n", "OK\r\n");
-		}	
+	
+	/*access to network*/
+	
+	ok = send_AT_command("AT+CSQ\r\n", "+CSQ");
+	
+	ret |= (ok << 1);
+	
+	
+	/*send in text mode*/
+	
+	ok = send_AT_command("AT+CMGF=1\r\n", "OK\r\n");
+	
+	ret |= (ok << 2);
+	
+	
+	/*save sms in sim card*/
+	
+	ok = send_AT_command("AT+CNMI=2,1,0,0,0\r\n", "OK\r\n");
+	
+	ret |= (ok << 3);	
+	
+	
+	/*dellete all sms saved in sim memory*/
+	
+	ok = send_AT_command("AT+CMGDA=\"DEL ALL\"\r\n", "OK\r\n");
+	
+	ret |= (ok << 4);
 
-		
-		/*save setting*/
-		
-		if (ok == 1)
-		{
-				ok = send_AT_command("AT&W\r\n", "OK\r\n");
-		}	
+	
+	/*save setting*/
+	
+	ok = send_AT_command("AT&W\r\n", "OK\r\n");
+	
+	ret |= (ok << 5);	
 
-		
-		rx_clear();
-		HAL_UART_Receive_IT(HUART , (uint8_t *)&uart1_rx_temp , 1);
+	
+	
+	if (ret == 0x3F)
+	{
+		ret = 1;
+	}
+	else
+	{
+		ret = 0;
+	}
+	
+	
+	rx_buffer_clear();
+	
+	HAL_UART_Receive_IT(HUART, (uint8_t *)&uart1_rx_temp, 1);
+	
+	return ret;
 }
 
 
@@ -75,7 +92,7 @@ uint8_t send_AT_command (char *command, char *GSM_received_answer)
 {	
 	  uint16_t timeout = 10000;
 	
-	  rx_clear();
+	  rx_buffer_clear();
 	
 	  send_string(command);
 	
@@ -93,6 +110,46 @@ uint8_t send_AT_command (char *command, char *GSM_received_answer)
 		return FALSE;
 }
 
+
+/*------------------------------ Read SMS Received from SIM800  ---------------------------------*/
+
+
+void GSM_read_message (void)
+{
+		char *a ;
+	
+		char read_SIM_cmd[30], Msg_number[20], Msg_date[30], Msg_text[100], buffer[40];
+	
+		uint8_t msg_index = 0, buffer_len = 0;
+	
+	  a = strstr(uart1_rx_buffer,"+CMTI:");
+		msg_index = (*(a + 12)) - 48;
+	
+		rx_buffer_clear();
+		
+		sprintf(buffer, "AT+CMGR=%d\r\n", msg_index);
+	
+		send_AT_command(buffer, "+CMGR");
+		
+		a = strstr(uart1_rx_buffer, "+CMGR");
+	
+		if (a)
+		{
+				sscanf(a, "%*[^,],\"%[^\"]\",%*[^,],\"%[^\"]\"\r\n%[^\r]", Msg_number, Msg_date, Msg_text);
+				strcpy(receive_message, Msg_text);	
+				strcpy(receive_message_number, Msg_number);
+				strcpy(receive_message_date, Msg_date);
+				rx_buffer_clear();
+		}	
+		
+		if (msg_index == 9)
+		{
+				GSM_message_delete();
+				rx_buffer_clear();
+		}
+}
+
+
 /*--------------------------Call to a Number-------------------------*/
 
 uint8_t GSM_call (char *number)
@@ -103,35 +160,35 @@ uint8_t GSM_call (char *number)
 	
 	  if (send_AT_command("ATH\r\n", "OK\r\n"))
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return TRUE;
 		}
 		else
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return FALSE;
 		}
 }
 
 /*------------------------Disconnect Received Call--------------------------*/
 
-uint8_t GSM_callDisconnect (void)
+uint8_t GSM_call_disconnect (void)
 {
     if (send_AT_command("ATH\r\n", "OK\r\n"))
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return TRUE;
 		}
 		else
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return FALSE;
 		}
 }
 
 /*------------------------------ Send SMS  ---------------------------------*/
 
-uint8_t GSM_sendMessage (char *msg, char *number)
+uint8_t GSM_send_message (char *msg, char *number)
 {
     char _buffer[RX_BUFFER_SIZE];
 	
@@ -139,23 +196,21 @@ uint8_t GSM_sendMessage (char *msg, char *number)
 	
     if (send_AT_command(_buffer, "\r\n>") == FALSE)
     {
-        rx_clear();
+        rx_buffer_clear();
         return FALSE;
     }
 		else 
 		{
         sprintf(_buffer, "%s%c", msg, 26);
 			
-        send_string(_buffer);
-			
 			  if (send_AT_command(_buffer, "+CMGS"))
 				{
-			      rx_clear();
+			      rx_buffer_clear();
 					  return TRUE;
 		    }
 		    else
 		    {
-			      rx_clear();
+			      rx_buffer_clear();
 					  return FALSE;
 		    }
     }
@@ -166,42 +221,11 @@ uint8_t GSM_sendMessage (char *msg, char *number)
 void send_string (char *msg)
 {
     HAL_UART_Receive_IT(HUART, (uint8_t *)&uart1_rx_temp, 1);
+	
     HAL_UART_Transmit(HUART, (uint8_t *)msg, strlen(msg), 1000);
 }
 
-/*------------------------------ Read SMS Received from SIM800  ---------------------------------*/
 
-void GSM_readMessage (void)
-{
-		char *a ;
-		char read_SIM_cmd[30], Msg_number[20], Msg_date[30], Msg_text[100], buffer[40];
-		uint8_t msg_index = 0, buffer_len = 0;
-		
-		msg_index = uart1_rx_buffer[14]-48;
-
-		rx_clear();
-		
-		while (!GSM_wakeup());
-		
-		sprintf(buffer, "AT+CMGR=%d\r\n", msg_index);
-		send_AT_command(buffer, "+CMGR");
-		
-		a = strstr(uart1_rx_buffer, "+CMGR");
-		if (a)
-		{
-				sscanf(a, "%*[^,],\"%[^\"]\",%*[^,],\"%[^\"]\"\r\n%[^\r]", Msg_number, Msg_date, Msg_text);
-				strcpy(receive_message, Msg_text);	
-				strcpy(receive_message_number, Msg_number);
-				strcpy(receive_message_date, Msg_date);
-				rx_clear();
-		}	
-		
-		if (msg_index == 9)
-		{
-				GSM_messageDelete();
-				rx_clear();
-		}
-}
 
 /*-------------------------- Function In UART Interrupt Callback  ---------------------------*/
 
@@ -219,7 +243,7 @@ void get_answer (void)
 
 /*---------------------------- Set rx_buffer and rx_index to 0  ----------------------------*/
 
-void rx_clear (void)
+void rx_buffer_clear (void)
 {
 		uart1_rx_index = 0;
 	
@@ -228,32 +252,32 @@ void rx_clear (void)
 
 /*-------------------------- Dellete All SMS That Stored In SIM800  --------------------------*/
 
-uint8_t GSM_messageDelete (void)
+uint8_t GSM_message_delete (void)
 {
     if (send_AT_command("AT+CMGDA=\"DEL ALL\"\r\n", "OK\r\n"))
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return TRUE;
 		}
 		else
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return FALSE;
 		}	
 }
 
 /*-------------------------- SIM800 Goes In Sleep Mode  --------------------------*/
 
-uint8_t GSM_goSleep (void)
+uint8_t GSM_go_sleep (void)
 {
     if (send_AT_command("AT+CSCLK=2\r\n", "OK\r\n"))
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return TRUE;
 		}
 		else
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return FALSE;
 		}
 }
@@ -263,31 +287,19 @@ uint8_t GSM_goSleep (void)
 uint8_t GSM_wakeup (void)
 {
 	send_string("AT\r\n");
+	
 	HAL_Delay(200);
 	
     if (send_AT_command("AT+CSCLK=0\r\n", "OK\r\n"))
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return TRUE;
 		}
 		else
 		{
-				rx_clear();
+				rx_buffer_clear();
 			  return FALSE;
 		}
-}
-
-/*--------------------------set 0 to all buffers  --------------------------*/
-
-void	clear_all_buffers (void)
-{
-		rx_clear();
-	
-		memset(receive_message, 0, RX_BUFFER_SIZE);
-	
-		memset(receive_message_number, 0, RECEIVE_NUMBER_SIZE);
-	
-		memset(receive_message_date, 0, RECEIVE_NUMBER_SIZE); 
 }
 
 /*-------------------------- blink  --------------------------*/
@@ -295,13 +307,18 @@ void	clear_all_buffers (void)
 void 	green_blink (uint16_t delay)
 {
 		HAL_GPIO_WritePin(GREEN_GPIO_Port ,GREEN_Pin ,GPIO_PIN_SET);
+	
 		HAL_Delay(delay);
+	
 		HAL_GPIO_WritePin(GREEN_GPIO_Port, GREEN_Pin, GPIO_PIN_RESET);
 }
+
 
 void 	yellow_blink (uint16_t delay)
 {
 		HAL_GPIO_WritePin(YELLOW_GPIO_Port, YELLOW_Pin, GPIO_PIN_SET);
+	
 		HAL_Delay(delay);
+	
 		HAL_GPIO_WritePin(YELLOW_GPIO_Port, YELLOW_Pin, GPIO_PIN_RESET);
 }

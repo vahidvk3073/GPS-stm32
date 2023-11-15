@@ -1,6 +1,5 @@
 --cpu Cortex-M3
 "car_gps_v2\startup_stm32f103xb.o"
-"car_gps_v2\gsm_stm32.o"
 "car_gps_v2\gps.o"
 "car_gps_v2\main.o"
 "car_gps_v2\gpio.o"
@@ -10,6 +9,7 @@
 "car_gps_v2\stm32f1xx_it.o"
 "car_gps_v2\stm32f1xx_hal_msp.o"
 "car_gps_v2\sleep_functions.o"
+"car_gps_v2\gsm_stm32.o"
 "car_gps_v2\stm32f1xx_hal_gpio_ex.o"
 "car_gps_v2\stm32f1xx_hal_adc.o"
 "car_gps_v2\stm32f1xx_hal_adc_ex.o"
