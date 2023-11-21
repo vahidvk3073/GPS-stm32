@@ -302,6 +302,17 @@ uint8_t GSM_wakeup (void)
 		}
 }
 
+/*-------------------------- clear all buffers  --------------------------*/
+
+void clear_all_buffer (void)
+{
+	rx_buffer_clear();
+	memset(receive_message , 0 , RX_BUFFER_SIZE);
+	memset(receive_message_number , 0 , RECEIVE_NUMBER_SIZE);
+	memset(receive_message_date , 0 , RECEIVE_NUMBER_SIZE);
+}
+
+
 /*-------------------------- blink  --------------------------*/
 
 void 	green_blink (uint16_t delay)

@@ -37,7 +37,7 @@ I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h)(0x654C86C7)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6035471C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354718)
 I (..\Core\Inc\gps.h)(0x6471E914)
-F (../Core/Src/main.c)(0x6554654F)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_car_gps_v2-IC:/Users/vahid/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/vahid/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.0/Device/Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o car_gps_v2/main.o -MD)
+F (../Core/Src/main.c)(0x6554F714)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_car_gps_v2-IC:/Users/vahid/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/vahid/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.0/Device/Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o car_gps_v2/main.o -MD)
 I (..\Core\Inc\main.h)(0x6550865A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x654C86C7)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x65508659)
@@ -76,7 +76,7 @@ I (..\Core\Inc\usart.h)(0x65508659)
 I (..\Core\Inc\gpio.h)(0x65508658)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x60354718)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6035471C)
-I (..\Core\Inc\GSM_stm32.h)(0x655375C9)
+I (..\Core\Inc\GSM_stm32.h)(0x6554F706)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x60354712)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdarg.h)(0x6035471C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354718)
@@ -320,13 +320,13 @@ I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc.h)(0x654C86C7)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rtc_ex.h)(0x654C86C7)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h)(0x654C86C7)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x60354718)
-I (..\Core\Inc\GSM_stm32.h)(0x655375C9)
+I (..\Core\Inc\GSM_stm32.h)(0x6554F706)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x60354712)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdarg.h)(0x6035471C)
 I (C:\Keil_v5\ARM\ARMCLANG\include\string.h)(0x60354718)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6035471C)
-F (..\Core\Src\GSM_stm32.c)(0x65537C93)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_car_gps_v2-IC:/Users/vahid/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/vahid/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.0/Device/Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o car_gps_v2/gsm_stm32.o -MD)
-I (..\Core\Inc\GSM_stm32.h)(0x655375C9)
+F (..\Core\Src\GSM_stm32.c)(0x6554F705)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__MICROLIB -gdwarf-4 -O1 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I ../Core/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc -I ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_car_gps_v2-IC:/Users/vahid/AppData/Local/Arm/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Users/vahid/AppData/Local/Arm/Packs/Keil/STM32F1xx_DFP/2.4.0/Device/Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F103xB-o car_gps_v2/gsm_stm32.o -MD)
+I (..\Core\Inc\GSM_stm32.h)(0x6554F706)
 I (..\Core\Inc\main.h)(0x6550865A)
 I (..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h)(0x654C86C7)
 I (..\Core\Inc\stm32f1xx_hal_conf.h)(0x65508659)

@@ -19,6 +19,7 @@
 void 				send_string(char *msg);
 void				get_answer(void);
 void 				rx_buffer_clear(void);
+void				clear_all_buffer (void);
 void 				yellow_blink(uint16_t delay);
 void 				green_blink(uint16_t delay);
 uint8_t 		send_AT_command(char *command, char *GSM_received_answer);

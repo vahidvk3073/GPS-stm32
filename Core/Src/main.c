@@ -125,7 +125,6 @@ void send_RTC_alarm(void);
 
 void RTC_init(void);
 
-void clear_all_buffer(void);
 
 /* USER CODE END PFP */
 
@@ -473,13 +472,6 @@ void send_RTC_alarm (void)
 		sleep_mode_millis = HAL_GetTick();
 }
 
-void clear_all_buffer (void)
-{
-	rx_buffer_clear();
-	memset(receive_message , 0 , RX_BUFFER_SIZE);
-	memset(receive_message_number , 0 , RECEIVE_NUMBER_SIZE);
-	memset(receive_message_date , 0 , RECEIVE_NUMBER_SIZE);
-}
 
 void RTC_init (void)
 {

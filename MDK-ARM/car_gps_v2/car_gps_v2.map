@@ -132,7 +132,7 @@ Section Cross References
     main.o(.text.main) refers to main.o(.data.number) for number
     main.o(.text.main) refers to main.o(.text.send_location) for send_location
     main.o(.text.main) refers to main.o(.text.send_battery_voltage) for send_battery_voltage
-    main.o(.text.main) refers to main.o(.text.clear_all_buffer) for clear_all_buffer
+    main.o(.text.main) refers to gsm_stm32.o(.text.clear_all_buffer) for clear_all_buffer
     main.o(.text.main) refers to main.o(.bss.larzesh_flag) for larzesh_flag
     main.o(.text.main) refers to main.o(.text.send_larzesh_alarm) for send_larzesh_alarm
     main.o(.text.main) refers to main.o(.bss.RTC_Alarm_Flag) for RTC_Alarm_Flag
@@ -177,12 +177,6 @@ Section Cross References
     main.o(.text.send_battery_voltage) refers to main.o(.data.number) for number
     main.o(.text.send_battery_voltage) refers to gsm_stm32.o(.text.GSM_send_message) for GSM_send_message
     main.o(.ARM.exidx.text.send_battery_voltage) refers to main.o(.text.send_battery_voltage) for [Anonymous Symbol]
-    main.o(.text.clear_all_buffer) refers to gsm_stm32.o(.text.rx_buffer_clear) for rx_buffer_clear
-    main.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message) for receive_message
-    main.o(.text.clear_all_buffer) refers to memseta.o(.text) for __aeabi_memclr
-    main.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message_number) for receive_message_number
-    main.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message_date) for receive_message_date
-    main.o(.ARM.exidx.text.clear_all_buffer) refers to main.o(.text.clear_all_buffer) for [Anonymous Symbol]
     main.o(.text.send_larzesh_alarm) refers to main.o(.bss.larzesh_flag) for larzesh_flag
     main.o(.text.send_larzesh_alarm) refers to gsm_stm32.o(.text.GSM_wakeup) for GSM_wakeup
     main.o(.text.send_larzesh_alarm) refers to main.o(.data.number) for number
@@ -395,6 +389,14 @@ Section Cross References
     gsm_stm32.o(.text.GSM_wakeup) refers to gsm_stm32.o(.text.rx_buffer_clear) for rx_buffer_clear
     gsm_stm32.o(.ARM.exidx.text.GSM_wakeup) refers (Special) to _scanf_str.o(.text) for _scanf_string
     gsm_stm32.o(.ARM.exidx.text.GSM_wakeup) refers to gsm_stm32.o(.text.GSM_wakeup) for [Anonymous Symbol]
+    gsm_stm32.o(.text.clear_all_buffer) refers (Special) to _scanf_str.o(.text) for _scanf_string
+    gsm_stm32.o(.text.clear_all_buffer) refers to gsm_stm32.o(.text.rx_buffer_clear) for rx_buffer_clear
+    gsm_stm32.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message) for receive_message
+    gsm_stm32.o(.text.clear_all_buffer) refers to memseta.o(.text) for __aeabi_memclr4
+    gsm_stm32.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message_number) for receive_message_number
+    gsm_stm32.o(.text.clear_all_buffer) refers to gsm_stm32.o(.bss.receive_message_date) for receive_message_date
+    gsm_stm32.o(.ARM.exidx.text.clear_all_buffer) refers (Special) to _scanf_str.o(.text) for _scanf_string
+    gsm_stm32.o(.ARM.exidx.text.clear_all_buffer) refers to gsm_stm32.o(.text.clear_all_buffer) for [Anonymous Symbol]
     gsm_stm32.o(.text.green_blink) refers (Special) to _scanf_str.o(.text) for _scanf_string
     gsm_stm32.o(.text.green_blink) refers to stm32f1xx_hal_gpio.o(.text.HAL_GPIO_WritePin) for HAL_GPIO_WritePin
     gsm_stm32.o(.text.green_blink) refers to stm32f1xx_hal.o(.text.HAL_Delay) for HAL_Delay
@@ -1338,7 +1340,6 @@ Removing Unused input sections from the image.
     Removing main.o(.ARM.exidx.text.RTC_init), (8 bytes).
     Removing main.o(.ARM.exidx.text.send_location), (8 bytes).
     Removing main.o(.ARM.exidx.text.send_battery_voltage), (8 bytes).
-    Removing main.o(.ARM.exidx.text.clear_all_buffer), (8 bytes).
     Removing main.o(.ARM.exidx.text.send_larzesh_alarm), (8 bytes).
     Removing main.o(.ARM.exidx.text.send_RTC_alarm), (8 bytes).
     Removing main.o(.ARM.exidx.text.Error_Handler), (8 bytes).
@@ -1399,6 +1400,7 @@ Removing Unused input sections from the image.
     Removing gsm_stm32.o(.ARM.exidx.text.get_answer), (8 bytes).
     Removing gsm_stm32.o(.ARM.exidx.text.GSM_go_sleep), (8 bytes).
     Removing gsm_stm32.o(.ARM.exidx.text.GSM_wakeup), (8 bytes).
+    Removing gsm_stm32.o(.ARM.exidx.text.clear_all_buffer), (8 bytes).
     Removing gsm_stm32.o(.ARM.exidx.text.green_blink), (8 bytes).
     Removing gsm_stm32.o(.ARM.exidx.text.yellow_blink), (8 bytes).
     Removing gsm_stm32.o(.bss.cmp_index), (1 bytes).
@@ -2257,7 +2259,7 @@ Image Symbol Table
     __NVIC_SystemReset                       0x08003fcd   Thumb Code    36  stm32f1xx_hal_cortex.o(.text.__NVIC_SystemReset)
     [Anonymous Symbol]                       0x08003fcc   Section        0  stm32f1xx_hal_cortex.o(.text.__NVIC_SystemReset)
     [Anonymous Symbol]                       0x08003ff0   Section        0  main.o(.text.check_battery_voltage)
-    [Anonymous Symbol]                       0x08004094   Section        0  main.o(.text.clear_all_buffer)
+    [Anonymous Symbol]                       0x08004094   Section        0  gsm_stm32.o(.text.clear_all_buffer)
     [Anonymous Symbol]                       0x080040dc   Section        0  gsm_stm32.o(.text.get_answer)
     [Anonymous Symbol]                       0x08004124   Section        0  sleep_functions.o(.text.go_to_sleepMode)
     [Anonymous Symbol]                       0x08004160   Section        0  gsm_stm32.o(.text.green_blink)
@@ -2553,7 +2555,7 @@ Image Symbol Table
     USART2_IRQHandler                        0x08003f1d   Thumb Code    16  stm32f1xx_it.o(.text.USART2_IRQHandler)
     UsageFault_Handler                       0x08003f2d   Thumb Code     2  stm32f1xx_it.o(.text.UsageFault_Handler)
     check_battery_voltage                    0x08003ff1   Thumb Code   164  main.o(.text.check_battery_voltage)
-    clear_all_buffer                         0x08004095   Thumb Code    72  main.o(.text.clear_all_buffer)
+    clear_all_buffer                         0x08004095   Thumb Code    72  gsm_stm32.o(.text.clear_all_buffer)
     get_answer                               0x080040dd   Thumb Code    70  gsm_stm32.o(.text.get_answer)
     go_to_sleepMode                          0x08004125   Thumb Code    58  sleep_functions.o(.text.go_to_sleepMode)
     green_blink                              0x08004161   Thumb Code    40  gsm_stm32.o(.text.green_blink)
@@ -2605,8 +2607,8 @@ Image Symbol Table
     myAlarm                                  0x20000a04   Data           8  main.o(.bss.myAlarm)
     receive_message                          0x20000a0c   Data         100  gsm_stm32.o(.bss.receive_message)
     receive_message_date                     0x20000a70   Data          30  gsm_stm32.o(.bss.receive_message_date)
-    receive_message_number                   0x20000a8e   Data          30  gsm_stm32.o(.bss.receive_message_number)
-    rx_data                                  0x20000aac   Data           1  gps.o(.bss.rx_data)
+    receive_message_number                   0x20000a90   Data          30  gsm_stm32.o(.bss.receive_message_number)
+    rx_data                                  0x20000aae   Data           1  gps.o(.bss.rx_data)
     send_locatoin_millis                     0x20000ab0   Data           4  main.o(.bss.send_locatoin_millis)
     sleep_mode_millis                        0x20000ab4   Data           4  sleep_functions.o(.bss.sleep_mode_millis)
     uart1_rx_buffer                          0x20000ab8   Data         100  gsm_stm32.o(.bss.uart1_rx_buffer)
@@ -2685,12 +2687,12 @@ Memory Map of the image
     0x0800137e   0x0800137e   0x00000002   PAD
     0x08001380   0x08001380   0x00000092   Code   RO          268    .text.ADC_Enable    stm32f1xx_hal_adc.o
     0x08001412   0x08001412   0x00000002   PAD
-    0x08001414   0x08001414   0x00000002   Code   RO          149    .text.BusFault_Handler  stm32f1xx_it.o
+    0x08001414   0x08001414   0x00000002   Code   RO          147    .text.BusFault_Handler  stm32f1xx_it.o
     0x08001416   0x08001416   0x00000002   PAD
-    0x08001418   0x08001418   0x00000002   Code   RO          155    .text.DebugMon_Handler  stm32f1xx_it.o
+    0x08001418   0x08001418   0x00000002   Code   RO          153    .text.DebugMon_Handler  stm32f1xx_it.o
     0x0800141a   0x0800141a   0x00000002   PAD
-    0x0800141c   0x0800141c   0x0000000c   Code   RO          163    .text.EXTI9_5_IRQHandler  stm32f1xx_it.o
-    0x08001428   0x08001428   0x0000000a   Code   RO           56    .text.Error_Handler  main.o
+    0x0800141c   0x0800141c   0x0000000c   Code   RO          161    .text.EXTI9_5_IRQHandler  stm32f1xx_it.o
+    0x08001428   0x08001428   0x0000000a   Code   RO           54    .text.Error_Handler  main.o
     0x08001432   0x08001432   0x00000002   PAD
     0x08001434   0x08001434   0x0000001a   Code   RO           11    .text.GPS_Init      gps.o
     0x0800144e   0x0800144e   0x00000002   PAD
@@ -2699,19 +2701,19 @@ Memory Map of the image
     0x08001512   0x08001512   0x00000002   PAD
     0x08001514   0x08001514   0x000001d4   Code   RO           17    .text.GPS_parse     gps.o
     0x080016e8   0x080016e8   0x00000080   Code   RO           15    .text.GPS_validate  gps.o
-    0x08001768   0x08001768   0x00000030   Code   RO          218    .text.GSM_go_sleep  gsm_stm32.o
-    0x08001798   0x08001798   0x000000c4   Code   RO          198    .text.GSM_init      gsm_stm32.o
-    0x0800185c   0x0800185c   0x00000026   Code   RO          208    .text.GSM_message_delete  gsm_stm32.o
+    0x08001768   0x08001768   0x00000030   Code   RO          216    .text.GSM_go_sleep  gsm_stm32.o
+    0x08001798   0x08001798   0x000000c4   Code   RO          196    .text.GSM_init      gsm_stm32.o
+    0x0800185c   0x0800185c   0x00000026   Code   RO          206    .text.GSM_message_delete  gsm_stm32.o
     0x08001882   0x08001882   0x00000002   PAD
-    0x08001884   0x08001884   0x000000dc   Code   RO          206    .text.GSM_read_message  gsm_stm32.o
-    0x08001960   0x08001960   0x00000070   Code   RO          214    .text.GSM_send_message  gsm_stm32.o
-    0x080019d0   0x080019d0   0x00000044   Code   RO          220    .text.GSM_wakeup    gsm_stm32.o
+    0x08001884   0x08001884   0x000000dc   Code   RO          204    .text.GSM_read_message  gsm_stm32.o
+    0x08001960   0x08001960   0x00000070   Code   RO          212    .text.GSM_send_message  gsm_stm32.o
+    0x080019d0   0x080019d0   0x00000044   Code   RO          218    .text.GSM_wakeup    gsm_stm32.o
     0x08001a14   0x08001a14   0x0000010e   Code   RO          302    .text.HAL_ADC_ConfigChannel  stm32f1xx_hal_adc.o
     0x08001b22   0x08001b22   0x00000002   PAD
     0x08001b24   0x08001b24   0x00000006   Code   RO          290    .text.HAL_ADC_GetValue  stm32f1xx_hal_adc.o
     0x08001b2a   0x08001b2a   0x00000002   PAD
     0x08001b2c   0x08001b2c   0x00000118   Code   RO          256    .text.HAL_ADC_Init  stm32f1xx_hal_adc.o
-    0x08001c44   0x08001c44   0x00000066   Code   RO           97    .text.HAL_ADC_MspInit  adc.o
+    0x08001c44   0x08001c44   0x00000066   Code   RO           95    .text.HAL_ADC_MspInit  adc.o
     0x08001caa   0x08001caa   0x00000002   PAD
     0x08001cac   0x08001cac   0x0000018c   Code   RO          272    .text.HAL_ADC_PollForConversion  stm32f1xx_hal_adc.o
     0x08001e38   0x08001e38   0x000000de   Code   RO          266    .text.HAL_ADC_Start  stm32f1xx_hal_adc.o
@@ -2737,7 +2739,7 @@ Memory Map of the image
     0x080023f8   0x080023f8   0x00000026   Code   RO          352    .text.HAL_Init      stm32f1xx_hal.o
     0x0800241e   0x0800241e   0x00000002   PAD
     0x08002420   0x08002420   0x00000050   Code   RO          354    .text.HAL_InitTick  stm32f1xx_hal.o
-    0x08002470   0x08002470   0x00000042   Code   RO          176    .text.HAL_MspInit   stm32f1xx_hal_msp.o
+    0x08002470   0x08002470   0x00000042   Code   RO          174    .text.HAL_MspInit   stm32f1xx_hal_msp.o
     0x080024b2   0x080024b2   0x00000002   PAD
     0x080024b4   0x080024b4   0x00000008   Code   RO          539    .text.HAL_NVIC_DisableIRQ  stm32f1xx_hal_cortex.o
     0x080024bc   0x080024bc   0x00000008   Code   RO          535    .text.HAL_NVIC_EnableIRQ  stm32f1xx_hal_cortex.o
@@ -2767,7 +2769,7 @@ Memory Map of the image
     0x08002c98   0x08002c98   0x00000116   Code   RO          760    .text.HAL_RTC_GetTime  stm32f1xx_hal_rtc.o
     0x08002dae   0x08002dae   0x00000002   PAD
     0x08002db0   0x08002db0   0x00000098   Code   RO          736    .text.HAL_RTC_Init  stm32f1xx_hal_rtc.o
-    0x08002e48   0x08002e48   0x00000054   Code   RO          112    .text.HAL_RTC_MspInit  rtc.o
+    0x08002e48   0x08002e48   0x00000054   Code   RO          110    .text.HAL_RTC_MspInit  rtc.o
     0x08002e9c   0x08002e9c   0x000000ee   Code   RO          776    .text.HAL_RTC_SetAlarm_IT  stm32f1xx_hal_rtc.o
     0x08002f8a   0x08002f8a   0x00000002   PAD
     0x08002f8c   0x08002f8c   0x000000c0   Code   RO          768    .text.HAL_RTC_SetDate  stm32f1xx_hal_rtc.o
@@ -2786,9 +2788,9 @@ Memory Map of the image
     0x08003164   0x08003164   0x00000242   Code   RO          922    .text.HAL_UART_IRQHandler  stm32f1xx_hal_uart.o
     0x080033a6   0x080033a6   0x00000002   PAD
     0x080033a8   0x080033a8   0x00000060   Code   RO          838    .text.HAL_UART_Init  stm32f1xx_hal_uart.o
-    0x08003408   0x08003408   0x0000005e   Code   RO          131    .text.HAL_UART_MspDeInit  usart.o
+    0x08003408   0x08003408   0x0000005e   Code   RO          129    .text.HAL_UART_MspDeInit  usart.o
     0x08003466   0x08003466   0x00000002   PAD
-    0x08003468   0x08003468   0x000000e6   Code   RO          129    .text.HAL_UART_MspInit  usart.o
+    0x08003468   0x08003468   0x000000e6   Code   RO          127    .text.HAL_UART_MspInit  usart.o
     0x0800354e   0x0800354e   0x00000002   PAD
     0x08003550   0x08003550   0x0000002a   Code   RO          862    .text.HAL_UART_Receive_IT  stm32f1xx_hal_uart.o
     0x0800357a   0x0800357a   0x00000002   PAD
@@ -2797,20 +2799,20 @@ Memory Map of the image
     0x080035a4   0x080035a4   0x000000ac   Code   RO          854    .text.HAL_UART_Transmit  stm32f1xx_hal_uart.o
     0x08003650   0x08003650   0x00000002   Code   RO          936    .text.HAL_UART_TxCpltCallback  stm32f1xx_hal_uart.o
     0x08003652   0x08003652   0x00000002   PAD
-    0x08003654   0x08003654   0x00000002   Code   RO          145    .text.HardFault_Handler  stm32f1xx_it.o
+    0x08003654   0x08003654   0x00000002   Code   RO          143    .text.HardFault_Handler  stm32f1xx_it.o
     0x08003656   0x08003656   0x00000002   PAD
-    0x08003658   0x08003658   0x0000005c   Code   RO           95    .text.MX_ADC1_Init  adc.o
-    0x080036b4   0x080036b4   0x000000b8   Code   RO           86    .text.MX_GPIO_Init  gpio.o
-    0x0800376c   0x0800376c   0x0000007e   Code   RO          110    .text.MX_RTC_Init   rtc.o
+    0x08003658   0x08003658   0x0000005c   Code   RO           93    .text.MX_ADC1_Init  adc.o
+    0x080036b4   0x080036b4   0x000000b8   Code   RO           84    .text.MX_GPIO_Init  gpio.o
+    0x0800376c   0x0800376c   0x0000007e   Code   RO          108    .text.MX_RTC_Init   rtc.o
     0x080037ea   0x080037ea   0x00000002   PAD
-    0x080037ec   0x080037ec   0x00000038   Code   RO          125    .text.MX_USART1_UART_Init  usart.o
-    0x08003824   0x08003824   0x00000038   Code   RO          127    .text.MX_USART2_UART_Init  usart.o
-    0x0800385c   0x0800385c   0x00000002   Code   RO          147    .text.MemManage_Handler  stm32f1xx_it.o
+    0x080037ec   0x080037ec   0x00000038   Code   RO          123    .text.MX_USART1_UART_Init  usart.o
+    0x08003824   0x08003824   0x00000038   Code   RO          125    .text.MX_USART2_UART_Init  usart.o
+    0x0800385c   0x0800385c   0x00000002   Code   RO          145    .text.MemManage_Handler  stm32f1xx_it.o
     0x0800385e   0x0800385e   0x00000002   PAD
-    0x08003860   0x08003860   0x00000002   Code   RO          143    .text.NMI_Handler   stm32f1xx_it.o
+    0x08003860   0x08003860   0x00000002   Code   RO          141    .text.NMI_Handler   stm32f1xx_it.o
     0x08003862   0x08003862   0x00000002   PAD
     0x08003864   0x08003864   0x0000002c   Code   RO          533    .text.NVIC_EncodePriority  stm32f1xx_hal_cortex.o
-    0x08003890   0x08003890   0x00000002   Code   RO          157    .text.PendSV_Handler  stm32f1xx_it.o
+    0x08003890   0x08003890   0x00000002   Code   RO          155    .text.PendSV_Handler  stm32f1xx_it.o
     0x08003892   0x08003892   0x00000002   PAD
     0x08003894   0x08003894   0x0000002c   Code   RO          417    .text.RCC_Delay     stm32f1xx_hal_rcc.o
     0x080038c0   0x080038c0   0x00000012   Code   RO          752    .text.RTC_Bcd2ToByte  stm32f1xx_hal_rtc.o
@@ -2820,7 +2822,7 @@ Memory Map of the image
     0x08003904   0x08003904   0x000000a4   Code   RO          764    .text.RTC_DateUpdate  stm32f1xx_hal_rtc.o
     0x080039a8   0x080039a8   0x00000030   Code   RO          742    .text.RTC_EnterInitMode  stm32f1xx_hal_rtc.o
     0x080039d8   0x080039d8   0x00000030   Code   RO          744    .text.RTC_ExitInitMode  stm32f1xx_hal_rtc.o
-    0x08003a08   0x08003a08   0x00000010   Code   RO          161    .text.RTC_IRQHandler  stm32f1xx_it.o
+    0x08003a08   0x08003a08   0x00000010   Code   RO          159    .text.RTC_IRQHandler  stm32f1xx_it.o
     0x08003a18   0x08003a18   0x00000044   Code   RO          790    .text.RTC_IsLeapYear  stm32f1xx_hal_rtc.o
     0x08003a5c   0x08003a5c   0x0000000e   Code   RO          756    .text.RTC_ReadAlarmCounter  stm32f1xx_hal_rtc.o
     0x08003a6a   0x08003a6a   0x00000002   PAD
@@ -2832,13 +2834,13 @@ Memory Map of the image
     0x08003b26   0x08003b26   0x00000002   PAD
     0x08003b28   0x08003b28   0x0000002a   Code   RO          754    .text.RTC_WriteTimeCounter  stm32f1xx_hal_rtc.o
     0x08003b52   0x08003b52   0x00000002   PAD
-    0x08003b54   0x08003b54   0x00000002   Code   RO          153    .text.SVC_Handler   stm32f1xx_it.o
+    0x08003b54   0x08003b54   0x00000002   Code   RO          151    .text.SVC_Handler   stm32f1xx_it.o
     0x08003b56   0x08003b56   0x00000002   PAD
-    0x08003b58   0x08003b58   0x00000026   Code   RO           58    .text.Set_Alarm     main.o
+    0x08003b58   0x08003b58   0x00000026   Code   RO           56    .text.Set_Alarm     main.o
     0x08003b7e   0x08003b7e   0x00000002   PAD
     0x08003b80   0x08003b80   0x0000002e   Code   RO          549    .text.SysTick_Config  stm32f1xx_hal_cortex.o
     0x08003bae   0x08003bae   0x00000002   PAD
-    0x08003bb0   0x08003bb0   0x00000008   Code   RO          159    .text.SysTick_Handler  stm32f1xx_it.o
+    0x08003bb0   0x08003bb0   0x00000008   Code   RO          157    .text.SysTick_Handler  stm32f1xx_it.o
     0x08003bb8   0x08003bb8   0x0000007a   Code   RO           42    .text.SystemClock_Config  main.o
     0x08003c32   0x08003c32   0x00000002   PAD
     0x08003c34   0x08003c34   0x00000002   Code   RO          970    .text.SystemInit    system_stm32f1xx.o
@@ -2854,9 +2856,9 @@ Memory Map of the image
     0x08003e8e   0x08003e8e   0x00000002   PAD
     0x08003e90   0x08003e90   0x0000007a   Code   RO          856    .text.UART_WaitOnFlagUntilTimeout  stm32f1xx_hal_uart.o
     0x08003f0a   0x08003f0a   0x00000002   PAD
-    0x08003f0c   0x08003f0c   0x00000010   Code   RO          165    .text.USART1_IRQHandler  stm32f1xx_it.o
-    0x08003f1c   0x08003f1c   0x00000010   Code   RO          167    .text.USART2_IRQHandler  stm32f1xx_it.o
-    0x08003f2c   0x08003f2c   0x00000002   Code   RO          151    .text.UsageFault_Handler  stm32f1xx_it.o
+    0x08003f0c   0x08003f0c   0x00000010   Code   RO          163    .text.USART1_IRQHandler  stm32f1xx_it.o
+    0x08003f1c   0x08003f1c   0x00000010   Code   RO          165    .text.USART2_IRQHandler  stm32f1xx_it.o
+    0x08003f2c   0x08003f2c   0x00000002   Code   RO          149    .text.UsageFault_Handler  stm32f1xx_it.o
     0x08003f2e   0x08003f2e   0x00000002   PAD
     0x08003f30   0x08003f30   0x00000028   Code   RO          541    .text.__NVIC_DisableIRQ  stm32f1xx_hal_cortex.o
     0x08003f58   0x08003f58   0x00000020   Code   RO          537    .text.__NVIC_EnableIRQ  stm32f1xx_hal_cortex.o
@@ -2865,24 +2867,24 @@ Memory Map of the image
     0x08003faa   0x08003faa   0x00000002   PAD
     0x08003fac   0x08003fac   0x00000020   Code   RO          525    .text.__NVIC_SetPriorityGrouping  stm32f1xx_hal_cortex.o
     0x08003fcc   0x08003fcc   0x00000024   Code   RO          545    .text.__NVIC_SystemReset  stm32f1xx_hal_cortex.o
-    0x08003ff0   0x08003ff0   0x000000a4   Code   RO           60    .text.check_battery_voltage  main.o
-    0x08004094   0x08004094   0x00000048   Code   RO           50    .text.clear_all_buffer  main.o
-    0x080040dc   0x080040dc   0x00000046   Code   RO          216    .text.get_answer    gsm_stm32.o
+    0x08003ff0   0x08003ff0   0x000000a4   Code   RO           58    .text.check_battery_voltage  main.o
+    0x08004094   0x08004094   0x00000048   Code   RO          220    .text.clear_all_buffer  gsm_stm32.o
+    0x080040dc   0x080040dc   0x00000046   Code   RO          214    .text.get_answer    gsm_stm32.o
     0x08004122   0x08004122   0x00000002   PAD
-    0x08004124   0x08004124   0x0000003a   Code   RO          185    .text.go_to_sleepMode  sleep_functions.o
+    0x08004124   0x08004124   0x0000003a   Code   RO          183    .text.go_to_sleepMode  sleep_functions.o
     0x0800415e   0x0800415e   0x00000002   PAD
     0x08004160   0x08004160   0x00000028   Code   RO          222    .text.green_blink   gsm_stm32.o
     0x08004188   0x08004188   0x00000190   Code   RO           40    .text.main          main.o
-    0x08004318   0x08004318   0x0000001e   Code   RO          202    .text.rx_buffer_clear  gsm_stm32.o
+    0x08004318   0x08004318   0x0000001e   Code   RO          200    .text.rx_buffer_clear  gsm_stm32.o
     0x08004336   0x08004336   0x00000002   PAD
-    0x08004338   0x08004338   0x00000048   Code   RO          200    .text.send_AT_command  gsm_stm32.o
-    0x08004380   0x08004380   0x00000084   Code   RO           54    .text.send_RTC_alarm  main.o
+    0x08004338   0x08004338   0x00000048   Code   RO          198    .text.send_AT_command  gsm_stm32.o
+    0x08004380   0x08004380   0x00000084   Code   RO           52    .text.send_RTC_alarm  main.o
     0x08004404   0x08004404   0x00000064   Code   RO           48    .text.send_battery_voltage  main.o
-    0x08004468   0x08004468   0x00000064   Code   RO           52    .text.send_larzesh_alarm  main.o
+    0x08004468   0x08004468   0x00000064   Code   RO           50    .text.send_larzesh_alarm  main.o
     0x080044cc   0x080044cc   0x0000017c   Code   RO           46    .text.send_location  main.o
-    0x08004648   0x08004648   0x00000032   Code   RO          204    .text.send_string   gsm_stm32.o
+    0x08004648   0x08004648   0x00000032   Code   RO          202    .text.send_string   gsm_stm32.o
     0x0800467a   0x0800467a   0x00000002   PAD
-    0x0800467c   0x0800467c   0x0000001e   Code   RO          187    .text.sleep_mode_init  sleep_functions.o
+    0x0800467c   0x0800467c   0x0000001e   Code   RO          185    .text.sleep_mode_init  sleep_functions.o
     0x0800469a   0x0800469a   0x00000002   PAD
     0x0800469c   0x0800469c   0x00000028   Code   RO          224    .text.yellow_blink  gsm_stm32.o
     0x080046c4   0x080046c4   0x00000028   Code   RO         1232    i.__0sprintf        mc_w.l(printfa.o)
@@ -2911,38 +2913,39 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   0x08005098   0x00000004   Data   RW          974    .data.SystemCoreClock  system_stm32f1xx.o
-    0x20000004   0x0800509c   0x00000001   Data   RW           73    .data.blink_state   main.o
-    0x20000005   0x0800509d   0x0000000e   Data   RW           62    .data.number        main.o
-    0x20000013   0x080050ab   0x00000001   Data   RW          189    .data.sleep_mode_flag  sleep_functions.o
+    0x20000004   0x0800509c   0x00000001   Data   RW           71    .data.blink_state   main.o
+    0x20000005   0x0800509d   0x0000000e   Data   RW           60    .data.number        main.o
+    0x20000013   0x080050ab   0x00000001   Data   RW          187    .data.sleep_mode_flag  sleep_functions.o
     0x20000014   0x080050ac   0x00000001   Data   RW          403    .data.uwTickFreq    stm32f1xx_hal.o
     0x20000015   0x080050ad   0x00000003   PAD
     0x20000018   0x080050b0   0x00000004   Data   RW          402    .data.uwTickPrio    stm32f1xx_hal.o
     0x2000001c   0x080050b4   0x00000004   PAD
-    0x20000020        -       0x00000004   Zero   RW           70    .bss.Battery_voltage  main.o
+    0x20000020        -       0x00000004   Zero   RW           68    .bss.Battery_voltage  main.o
     0x20000024        -       0x00000058   Zero   RW           25    .bss.GPS            gps.o
     0x2000007c        -       0x00000080   Zero   RW           23    .bss.GPS_rx_buffer  gps.o
     0x200000fc        -       0x00000001   Zero   RW           22    .bss.GPS_rx_index   gps.o
-    0x200000fd        -       0x00000001   Zero   RW           64    .bss.RTC_Alarm_Flag  main.o
-    0x200000fe        -       0x000007d0   Zero   RW           68    .bss.adc_value      main.o
+    0x200000fd        -       0x00000001   Zero   RW           62    .bss.RTC_Alarm_Flag  main.o
+    0x200000fe        -       0x000007d0   Zero   RW           66    .bss.adc_value      main.o
     0x200008ce   0x080050b4   0x00000002   PAD
-    0x200008d0        -       0x00000004   Zero   RW           69    .bss.adc_value_mean  main.o
-    0x200008d4        -       0x00000030   Zero   RW          101    .bss.hadc1          adc.o
-    0x20000904        -       0x00000014   Zero   RW          116    .bss.hrtc           rtc.o
-    0x20000918        -       0x00000048   Zero   RW          133    .bss.huart1         usart.o
-    0x20000960        -       0x00000048   Zero   RW          134    .bss.huart2         usart.o
-    0x200009a8        -       0x00000001   Zero   RW           66    .bss.larzesh_flag   main.o
+    0x200008d0        -       0x00000004   Zero   RW           67    .bss.adc_value_mean  main.o
+    0x200008d4        -       0x00000030   Zero   RW           99    .bss.hadc1          adc.o
+    0x20000904        -       0x00000014   Zero   RW          114    .bss.hrtc           rtc.o
+    0x20000918        -       0x00000048   Zero   RW          131    .bss.huart1         usart.o
+    0x20000960        -       0x00000048   Zero   RW          132    .bss.huart2         usart.o
+    0x200009a8        -       0x00000001   Zero   RW           64    .bss.larzesh_flag   main.o
     0x200009a9   0x080050b4   0x00000003   PAD
-    0x200009ac        -       0x00000004   Zero   RW           72    .bss.main_millis    main.o
-    0x200009b0        -       0x00000050   Zero   RW           75    .bss.map_link       main.o
-    0x20000a00        -       0x00000004   Zero   RW           67    .bss.millis_start_value  main.o
-    0x20000a04        -       0x00000008   Zero   RW           74    .bss.myAlarm        main.o
+    0x200009ac        -       0x00000004   Zero   RW           70    .bss.main_millis    main.o
+    0x200009b0        -       0x00000050   Zero   RW           73    .bss.map_link       main.o
+    0x20000a00        -       0x00000004   Zero   RW           65    .bss.millis_start_value  main.o
+    0x20000a04        -       0x00000008   Zero   RW           72    .bss.myAlarm        main.o
     0x20000a0c        -       0x00000064   Zero   RW          227    .bss.receive_message  gsm_stm32.o
     0x20000a70        -       0x0000001e   Zero   RW          229    .bss.receive_message_date  gsm_stm32.o
-    0x20000a8e        -       0x0000001e   Zero   RW          228    .bss.receive_message_number  gsm_stm32.o
-    0x20000aac        -       0x00000001   Zero   RW           21    .bss.rx_data        gps.o
-    0x20000aad   0x080050b4   0x00000003   PAD
-    0x20000ab0        -       0x00000004   Zero   RW           63    .bss.send_locatoin_millis  main.o
-    0x20000ab4        -       0x00000004   Zero   RW          190    .bss.sleep_mode_millis  sleep_functions.o
+    0x20000a8e   0x080050b4   0x00000002   PAD
+    0x20000a90        -       0x0000001e   Zero   RW          228    .bss.receive_message_number  gsm_stm32.o
+    0x20000aae        -       0x00000001   Zero   RW           21    .bss.rx_data        gps.o
+    0x20000aaf   0x080050b4   0x00000001   PAD
+    0x20000ab0        -       0x00000004   Zero   RW           61    .bss.send_locatoin_millis  main.o
+    0x20000ab4        -       0x00000004   Zero   RW          188    .bss.sleep_mode_millis  sleep_functions.o
     0x20000ab8        -       0x00000064   Zero   RW          226    .bss.uart1_rx_buffer  gsm_stm32.o
     0x20000b1c        -       0x00000001   Zero   RW          230    .bss.uart1_rx_index  gsm_stm32.o
     0x20000b1d        -       0x00000001   Zero   RW          233    .bss.uart1_rx_temp  gsm_stm32.o
@@ -2962,8 +2965,8 @@ Image component sizes
        194          0          0          0         48       3973   adc.o
        184          0          0          0          0       2621   gpio.o
        816        132         37          0        218       3382   gps.o
-       984        208         32          0        262       4740   gsm_stm32.o
-      1598        204          0         15       2110       8054   main.o
+      1056        208         32          0        262       4859   gsm_stm32.o
+      1526        204          0         15       2110       7959   main.o
        210          0          0          0         20       3670   rtc.o
         88          0          0          1          4        745   sleep_functions.o
         36          8        236          0       1024        764   startup_stm32f103xb.o
@@ -2984,7 +2987,7 @@ Image component sizes
        436          0          0          0        144       5525   usart.o
 
     ----------------------------------------------------------------------
-     13248        612        364         28       3852     133369   Object Totals
+     13248        612        364         28       3852     133393   Object Totals
          0          0         32          0          0          0   (incl. Generated)
        136          0          3          3         18          0   (incl. Padding)
 
@@ -3063,8 +3066,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     20204        752        428         28       3852     134885   Grand Totals
-     20204        752        428         28       3852     134885   ELF Image Totals
+     20204        752        428         28       3852     134909   Grand Totals
+     20204        752        428         28       3852     134909   ELF Image Totals
      20204        752        428         28          0          0   ROM Totals
 
 ==============================================================================
